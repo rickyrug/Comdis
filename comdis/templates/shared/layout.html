@@ -1,13 +1,28 @@
+{%load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comdis Web</title>
+    <link rel="stylesheet" href="{% static 'css/boostrap/bootstrap.min.css'  %}">
+    <link rel="stylesheet" href="{% static 'css/site.css'  %}">
+    <link rel="stylesheet" href="{% static 'css/datatable/datatables.min.css'  %}">
+    <link rel="stylesheet" href="{% static 'css/select2/select2.min.css'  %}">
+    <link rel="stylesheet" href="{% static 'css/toastr/toastr.min.css'  %}">
 </head>
 <body>
     {% block main %}
     
     {% endblock main %}
+
+        <script src="{% static 'js/vendors/jquery/jquery-3.6.0.min.js'  %}"></script>
+        <script src="{% static 'js/vendors/boostrap/bootstrap.bundle.min.js'  %}"></script>
+        <script src="{% static 'js/vendors/datatable/datatables.min.js'  %}"></script>
+        <script src="{% static 'js/vendors/select2/select2.min.js'  %}"></script>
+        <script src="{% static 'js/vendors/toastr/toastr.min.js'  %}"></script>
+        {%block scripts%}
+          
+        {%endblock%}
 </body>
 </html>
