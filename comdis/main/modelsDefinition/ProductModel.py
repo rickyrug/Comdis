@@ -1,13 +1,14 @@
 from django.db import models
 from django.utils.timezone import now
+from .UomModel import Uom
+from .ClassificationModel import Classification
 
-class Client(models.Model):
-    Name    = models.CharField(max_length=255,null=False)
-    Country = models.CharField(max_length=255,null=False)
-    City    = models.CharField(max_length=255,null=False)
-    ZipCode = models.CharField(max_length=255,null=False)
-    RFC     = models.CharField(max_length=255,null=False)
-    Address = models.CharField(max_length=255,null=False)
+
+class Product(models.Model):
+    Name = models.CharField(max_length=255,null=False)
+    Uom  = models.ForeignKey(Uom, on_delete=models.DO_NOTHING)
+    Classification = models.ForeignKey(Classification, on_delete=models.DO_NOTHING)
+    
 
 
     Created = models.DateTimeField(null= False,default=now)
@@ -19,4 +20,4 @@ class Client(models.Model):
         return self.Name
 
     class Meta:
-        db_table = 'Client'
+        db_table = 'Product'

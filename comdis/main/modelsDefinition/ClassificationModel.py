@@ -1,14 +1,9 @@
 from django.db import models
 from django.utils.timezone import now
 
-class Client(models.Model):
-    Name    = models.CharField(max_length=255,null=False)
-    Country = models.CharField(max_length=255,null=False)
-    City    = models.CharField(max_length=255,null=False)
-    ZipCode = models.CharField(max_length=255,null=False)
-    RFC     = models.CharField(max_length=255,null=False)
-    Address = models.CharField(max_length=255,null=False)
-
+class Classification(models.Model):
+    Name =  models.CharField(max_length=255,null=False) 
+    Code =  models.CharField(max_length=3,null=False) 
 
     Created = models.DateTimeField(null= False,default=now)
     CreatedBy = models.CharField(max_length=50, null= False,default='SERVER')
@@ -19,4 +14,6 @@ class Client(models.Model):
         return self.Name
 
     class Meta:
-        db_table = 'Client'
+        db_table = 'Classification'
+
+
