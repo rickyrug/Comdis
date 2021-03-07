@@ -4,10 +4,19 @@
 <h1 class="Display-4 mb-1">Third Parties</h1>
 
 <div class="row">
-    <div class="col-md-5">
+    
+        <h4>Clientes</h4>
         <table id="clientsList" class="table table-striped table-hover" style="width:100%"></table>
-    </div>
+  
    
+   
+</div>
+<hr>
+<div class="row mt-1">
+    
+        <h4>Proveedores</h4>
+        <table id="suppliersList" class="table table-striped table-hover" style="width:100%"></table>
+    
 </div>
 
 
@@ -15,8 +24,19 @@
 
 {%block scripts%}
 <script>
+    var dataClients     = "{{clientList|escapejs}}";
+    var datasetClients  = JSON.parse(dataClients)
     
+    var dataSuppliers    = "{{supplierList|escapejs}}";
+    var datasetSuppliers   = JSON.parse(dataSuppliers)
+
+
+    var url_upsertClient      = "{% url 'upsertclient' %}"
+    var url_deleteClient      = "{% url 'deleteclient' %}"
+
+    var url_upsertSupplier      = "{% url 'upsertsupplier' %}"
+    var url_deleteSupplier     = "{% url 'deletesupplier' %}"
 </script>
-    
+<script src="{% static 'js/site/thirdparties/thirdparties.js'  %}"></script>   
 
 {%endblock scripts%}

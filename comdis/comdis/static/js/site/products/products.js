@@ -1,4 +1,3 @@
-console.log("any")
 $(document).ready(function(){
 
     $("#productsList").DataTable({
