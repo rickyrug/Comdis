@@ -8,6 +8,8 @@ class Client(models.Model):
     ZipCode = models.CharField(max_length=255,null=False)
     RFC     = models.CharField(max_length=255,null=False)
     Address = models.CharField(max_length=255,null=False)
+    Phone1  = models.CharField(max_length=25,null=True)
+    Phone2  = models.CharField(max_length=25,null=True)
 
 
     Created = models.DateTimeField(null= False,default=now)
@@ -28,6 +30,8 @@ class Supplier(models.Model):
     ZipCode = models.CharField(max_length=255,null=False)
     RFC     = models.CharField(max_length=255,null=False)
     Address = models.CharField(max_length=255,null=False)
+    Phone1  = models.CharField(max_length=25,null=True)
+    Phone2  = models.CharField(max_length=25,null=True)
 
     Created = models.DateTimeField(null= False,default=now)
     CreatedBy = models.CharField(max_length=50, null= False,default='SERVER')
