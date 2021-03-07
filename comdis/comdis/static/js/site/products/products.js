@@ -12,7 +12,7 @@ $(document).ready(function(){
                 "render":function(data,type,row,meta)
                 {
                     
-                    data =   '<a href="'+url_upsert+'/'+row.pk+'">Edit</a>'
+                    data =   '<a href="'+url_upsert+'/'+row.pk+'" class="mr-1">Edit</a>'
                            + '<a href="'+url_delete+'/'+row.pk+'">Delete</a>' 
                     return data;
                 }
