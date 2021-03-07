@@ -21,6 +21,7 @@ class ProductForm(forms.Form):
     Name            = forms.CharField(label="Nombre: ", max_length=255, required=True)
     Classification  = forms.ChoiceField(label= "Clasificación: ", choices=ClassificationChoises)
     Uom             = forms.ChoiceField(label = "Unidad de medida: ", choices=UomChoises)
+    idProduct       = forms.CharField(widget=forms.HiddenInput, required=False)
 
     
    

@@ -8,6 +8,7 @@
   
     <form action="{% url 'upsertproducts' %}" method="POST" class=""> 
         {% csrf_token %}
+        {{ form.idProduct }}
         <div class="form-group">
            
             {{ form.Name| as_crispy_field}}

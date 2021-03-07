@@ -14,6 +14,7 @@
 <script>
     var data = "{{productList|escapejs}}";
     var dataset = JSON.parse(data)
+    var url_upsert = "{% url 'upsertproducts' %}"
    
 </script>
 <script src="{% static 'js/site/products/products.js'  %}"></script>        

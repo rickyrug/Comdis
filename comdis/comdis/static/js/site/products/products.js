@@ -41,7 +41,7 @@ $(document).ready(function(){
 
     });
 
-    $("div.toolbar").html('<a href="#" class="btn btn-primary" id="btnAddProduct">+</a>'); //se agrega boton de ++
+    $("div.toolbar").html('<a href="'+url_upsert+'" class="btn btn-primary" id="btnAddProduct">+</a>');  //se agrega boton de ++
 
 
 
