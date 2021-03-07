@@ -1,8 +1,8 @@
-from django.db import models
-from django.utils.timezone import now
-from .UomModel import Uom
-from .ClassificationModel import Classification
-
+from django.db              import models
+from django.utils.timezone  import now
+from main.models            import Classification
+from main.models            import Uom
+# Create your models here.
 
 class Product(models.Model):
     Name = models.CharField(max_length=255,null=False)
