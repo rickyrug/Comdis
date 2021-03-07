@@ -1,0 +1,28 @@
+{% extends 'shared/layout.html' %}
+{%load static%}
+{%load crispy_forms_tags %}
+
+{% block main %}
+<h1 class="Display-4 mb-1">Products Form</h1>
+<div class="row ">
+  
+    <form action="{% url 'upsertproducts' %}" method="POST" class=""> 
+        {% csrf_token %}
+        <div class="form-group">
+           
+            {{ form.Name| as_crispy_field}}
+        </div>
+        <div class="form-group">
+           
+            {{ form.Classification |as_crispy_field}}
+        </div>
+        <div class="form-group">
+            
+            {{ form.Uom |as_crispy_field}}
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+</div>
+{% endblock main %}
