@@ -1,8 +1,10 @@
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect,redirect
 from django.core.serializers import serialize
 from django.utils.timezone import now
 from .modelsDefinition.ProductModel import Product
 from .formsDefinitions.productFormDefinition import ProductForm
+from .modelsDefinition.UomModel import Uom
+from .modelsDefinition.ClassificationModel import Classification
 
 
 # Create your views here.
@@ -29,30 +31,30 @@ def upsertProducts(request,id_product= None):
 
         if form.is_valid():
             
-        
-
-       
             id_product      = form.cleaned_data['idProduct']
             name            = form.cleaned_data['Name']
             classification  = form.cleaned_data['Classification']
             uom             = form.cleaned_data['Uom']
 
+            uomObj              =  Uom.objects.get(pk = uom)
+            classificationObj   =  Classification.objects.get(pk = classification)   
+
             if not id_product:
                 Product.objects.create(
-                        Uom = uom
-                    ,   Classification= classification
+                        Uom = uomObj
+                    ,   Classification= classificationObj
                     ,   Name = name
                 )
             else:
                 updatedProduct                  = Product.objects.get(pk = id_product)
-                updatedProduct.Uom              = uom
-                updatedProduct.Classification   = classification
+                updatedProduct.Uom              = uomObj
+                updatedProduct.Classification   = classificationObj
                 updatedProduct.Name             = name
-                updatedProduct.Updated          = now
+               # updatedProduct.Updated          = now
                 updatedProduct.UpdatedBy        = 'SERVER'
                 updatedProduct.save()
 
-            return HttpResponseRedirect("products")        
+            return redirect("indexproducts")        
 
     else:
         if id_product != None:
@@ -74,3 +76,10 @@ def upsertProducts(request,id_product= None):
         ,"form": form
     }
     return render(request,"main/products/upsert.html",context)
+
+def deleteProducts(request,id_product):
+    if id_product:
+        deleteProduct = Product.objects.get(pk=id_product)
+        deleteProduct.delete()
+
+    return redirect("indexproducts")

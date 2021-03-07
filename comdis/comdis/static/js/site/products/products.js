@@ -1,4 +1,4 @@
-
+console.log("any")
 $(document).ready(function(){
 
     $("#productsList").DataTable({
@@ -7,6 +7,17 @@ $(document).ready(function(){
         data : dataset,
         select: true,
         "columns":[
+            {
+                "title":"Actions",
+                "render":function(data,type,row,meta)
+                {
+                    
+                    data =   '<a href="'+url_upsert+'/'+row.pk+'">Edit</a>'
+                           + '<a href="'+url_delete+'/'+row.pk+'">Delete</a>' 
+                    return data;
+                }
+
+            },
             { 
                 "title":"Id",
                 "data": "pk" 

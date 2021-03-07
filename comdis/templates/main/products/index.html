@@ -15,7 +15,7 @@
     var data = "{{productList|escapejs}}";
     var dataset = JSON.parse(data)
     var url_upsert = "{% url 'upsertproducts' %}"
-   
+    var url_delete = "{% url 'deleteproducts' %}"
 </script>
 <script src="{% static 'js/site/products/products.js'  %}"></script>        
 
