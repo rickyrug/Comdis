@@ -1,9 +1,21 @@
 from django import forms
+from main.models import Country, City
+
+def getContries():
+    items = Country.objects.values_list('id','Name')
+    choices = tuple([(u'', '-----')] + list(items))
+    return choices
+
+def getCities():
+    items = City.objects.values_list('id','Name')
+    choices = tuple([(u'', '-----')] + list(items))
+    return choices
+
 
 class CustomerForm(forms.Form):
     Name        = forms.CharField(label="Nombre: ", max_length=255, required=True)
-    City        = forms.CharField(label="Ciudad: ", max_length=255, required=True)
-    Country     = forms.CharField(label="País: ", max_length=255, required=True)
+    City        = forms.ChoiceField(label= "Ciudad: ", choices=getCities() ,required=True)
+    Country     = forms.ChoiceField(label= "País: ", choices=getContries() ,required=True)
     RFC         = forms.CharField(label="RFC: ", max_length=255, required=True)
     ZipCode     = forms.CharField(label="ZipCode: ", max_length=255, required=False)
     Address     = forms.CharField(label="Dirección: ", max_length=255, required=False)
@@ -13,8 +25,8 @@ class CustomerForm(forms.Form):
 
 class SupplierForm(forms.Form):
     Name        = forms.CharField(label="Nombre: ", max_length=255, required=True)
-    City        = forms.CharField(label="Ciudad: ", max_length=255, required=True)
-    Country     = forms.CharField(label="País: ", max_length=255, required=True)
+    City        = forms.ChoiceField(label= "Ciudad: ", choices=getCities() ,required=True)
+    Country     = forms.ChoiceField(label= "País: ", choices=getContries() ,required=True)
     RFC         = forms.CharField(label="RFC: ", max_length=255, required=True)
     ZipCode     = forms.CharField(label="ZipCode: ", max_length=255, required=False)
     Address     = forms.CharField(label="Dirección: ", max_length=255, required=False)

@@ -3,6 +3,7 @@ from django.core.serializers    import serialize
 from django.utils.timezone      import now
 from .models                    import Client, Supplier
 from .forms                     import CustomerForm, SupplierForm
+from main.models                import Country,City
 
 # Create your views here.
 
@@ -37,12 +38,15 @@ def upsertClients(request,id_client= None):
             var_Phone2  = form.cleaned_data['Phone2']
             var_idCustomer = form.cleaned_data['idCustomer']
 
+            countryObj      =  Country.objects.get(pk=var_Country)
+            cityObj         =  City.objects.get(pk=var_City)
+
             if not var_idCustomer:
                 Client.objects.create(
                     Address= var_Address
                     ,Name= var_Name
-                    ,Country= var_Country
-                    ,City=  var_City
+                    ,Country= countryObj
+                    ,City=  cityObj
                     , ZipCode=var_ZipCode
                     ,RFC = var_RFC
                     ,Phone1= var_Phone1
@@ -52,8 +56,8 @@ def upsertClients(request,id_client= None):
                 updateCustomer = Client.objects.get(pk = var_idCustomer)
                 updateCustomer.Address = var_Address
                 updateCustomer.Name    = var_Name
-                updateCustomer.Country = var_Country
-                updateCustomer.City    = var_City
+                updateCustomer.Country = countryObj
+                updateCustomer.City    = cityObj
                 updateCustomer.ZipCode = var_ZipCode
                 updateCustomer.RFC     = var_RFC
                 updateCustomer.Phone1  = var_Phone1
@@ -68,8 +72,8 @@ def upsertClients(request,id_client= None):
             customer = Client.objects.get(pk = id_client)
             initdata = {
                  "Name": customer.Name
-                ,"City":customer.City
-                ,"Country":customer.Country
+                ,"City":customer.City.pk
+                ,"Country":customer.Country.pk
                 ,"RFC":customer.RFC
                 ,"ZipCode":customer.ZipCode
                 ,"Address":customer.Address
@@ -104,23 +108,26 @@ def upsertSupplier(request,id_supplier= None):
             var_Phone2      = form.cleaned_data['Phone2']
             var_idSupplier  = form.cleaned_data['idSupplier']
 
-            if not id_supplier:
+            countryObj      =  Country.objects.get(pk=var_Country)
+            cityObj         =  City.objects.get(pk=var_City)
+
+            if not var_idSupplier:
                 Supplier.objects.create(
-                    Address= var_Address
-                    ,Name= var_Name
-                    ,Country= var_Country
-                    ,City=  var_City
+                    Address = var_Address
+                    ,Name   = var_Name
+                    ,Country= countryObj
+                    ,City   =  cityObj
                     ,ZipCode=var_ZipCode
-                    ,RFC = var_RFC
-                    ,Phone1= var_Phone1
+                    ,RFC    = var_RFC
+                    ,Phone1 = var_Phone1
                     ,Phone2 = var_Phone2
                 )
             else:
                 updateSupplier = Supplier.objects.get(pk = var_idSupplier)
                 updateSupplier.Address = var_Address
                 updateSupplier.Name    = var_Name
-                updateSupplier.Country = var_Country
-                updateSupplier.City    = var_City
+                updateSupplier.Country = countryObj
+                updateSupplier.City    = cityObj
                 updateSupplier.ZipCode = var_ZipCode
                 updateSupplier.RFC     = var_RFC
                 updateSupplier.Phone1  = var_Phone1
@@ -135,8 +142,8 @@ def upsertSupplier(request,id_supplier= None):
             supplier = Supplier.objects.get(pk = id_supplier)
             initdata = {
                  "Name": supplier.Name
-                ,"City":supplier.City
-                ,"Country":supplier.Country
+                ,"City":supplier.City.pk
+                ,"Country":supplier.Country.pk
                 ,"RFC":supplier.RFC
                 ,"ZipCode":supplier.ZipCode
                 ,"Address":supplier.Address
