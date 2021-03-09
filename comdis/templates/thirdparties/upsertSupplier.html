@@ -5,36 +5,77 @@
 {% block main %}
 <h1 class="Display-4 mb-1">Supplier Form</h1>
 <div class="row">
-    <form action="{% url 'upsertsupplier' %}" method="POST">
+    <form action="{% url 'upsertsupplier' %}" method="POST" class="w-75">
         {% csrf_token %}
         {{ form.idSupplier }}
-        <div class="form-group">
-            {{ form.Name| as_crispy_field}}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.Name| as_crispy_field}}
+                </div>
+            </div>
+            
         </div>
-        <div class="form-group">
-            {{ form.Country| as_crispy_field}}
+       
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{ form.Country| as_crispy_field}}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{ form.City| as_crispy_field}}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{ form.Address| as_crispy_field}}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{ form.ZipCode| as_crispy_field}}
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            {{ form.City| as_crispy_field}}
+        <div class="row mt-1">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.Phone1| as_crispy_field}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.Phone2| as_crispy_field}}
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            {{ form.ZipCode| as_crispy_field}}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.RFC| as_crispy_field}}
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            {{ form.Address| as_crispy_field}}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <a href="{% url 'indexthirdparties' %}" class="btn btn-info">Regresar</a>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            {{ form.RFC| as_crispy_field}}
-        </div>
-        <div class="form-group">
-            {{ form.Phone1| as_crispy_field}}
-        </div>
-        <div class="form-group">
-            {{ form.Phone2| as_crispy_field}}
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>
+       
+       
+       
+        
+       
+       
         
     </form>
 </div>
