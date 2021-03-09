@@ -2,7 +2,7 @@ from django.shortcuts           import render, HttpResponse, HttpResponseRedirec
 from django.core.serializers    import serialize
 from django.utils.timezone      import now
 from .models                    import Client, Supplier
-from .forms                     import CustomerForm, SupplierForm
+from .forms                     import CustomerForm, SupplierForm,ClientContact
 from main.models                import Country,City
 
 # Create your views here.
@@ -23,7 +23,7 @@ def index(request):
 
 def upsertClients(request,id_client= None):
     initdata = {}
-
+    formContact = None
     if request.method == 'POST':
         form = CustomerForm(request.POST)
 
@@ -83,11 +83,13 @@ def upsertClients(request,id_client= None):
 
             }
             form = CustomerForm(initdata)
+            formContact = ClientContact()
         else:
             form = CustomerForm()
 
     context = {
         "form":form
+        ,"formContact":formContact
     }
     return render(request,'thirdparties/upsertClient.html',context)
 
@@ -153,6 +155,7 @@ def upsertSupplier(request,id_supplier= None):
 
             }
             form = SupplierForm(initdata)
+
         else:
             form = SupplierForm()
 

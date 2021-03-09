@@ -3,8 +3,9 @@
 {%load crispy_forms_tags %}
 
 {% block main %}
-<h1 class="Display-4 mb-1">Client Form</h1>
+<h1 class="Display-4 mb-1">Cliente</h1>
 <div class="row">
+    
     <form action="{% url 'upsertclient' %}" method="POST" class="w-75">
         {% csrf_token %}
         {{ form.idCustomer }}
@@ -73,4 +74,48 @@
         
     </form>
 </div>
+
+{% if formContact %}
+<hr>
+<div class="row">
+   <div class="col-md-6">
+       <h2 class="display-4">Contactos</h2>
+       <form action="{% url 'upsertclient' %}" method="POST">
+            {% csrf_token %}
+            {{ formContact.idCliente }}
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {{ formContact.Name| as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {{ formContact.Phone| as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {{ formContact.Email| as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+           
+       </form>
+   </div>
+</div>
+{% endif %}
+
 {% endblock main %}
+
+{% block scripts %}
+
+
+
+{% endblock scripts %}
+

@@ -44,3 +44,20 @@ class Supplier(models.Model):
     
     class Meta:
         db_table = 'Supplier'
+
+class ClientContact(models.Model):
+    idCliente = models.ForeignKey(Client,on_delete=models.DO_NOTHING)
+    Name      = models.CharField(max_length=255,null=False)
+    Phone     = models.CharField(max_length=25,null=False)
+    Email     = models.CharField(max_length=255,null=False, default="")
+
+    Created = models.DateTimeField(null= False,default=now)
+    CreatedBy = models.CharField(max_length=50, null= False,default='SERVER')
+    Updated = models.DateTimeField(null= True,default=now)
+    UpdatedBy = models.CharField(max_length=50, null= True,default='SERVER')
+
+    def __str__(self):
+        return self.Name
+    
+    class Meta:
+        db_table = 'ClientContact'
