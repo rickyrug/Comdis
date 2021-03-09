@@ -2,7 +2,7 @@ from django.shortcuts           import render, HttpResponse, HttpResponseRedirec
 from django.core.serializers    import serialize
 from django.utils.timezone      import now
 from .models                    import Client, Supplier
-from .forms                     import CustomerForm
+from .forms                     import CustomerForm, SupplierForm
 
 # Create your views here.
 
@@ -90,9 +90,68 @@ def upsertClients(request,id_client= None):
 def upsertSupplier(request,id_supplier= None):
     initdata = {}
 
-   
+    if request.method == 'POST':
+        form = SupplierForm(request.POST)
 
-    context = {}
+        if form.is_valid():
+            var_Name        =  form.cleaned_data['Name']
+            var_City        = form.cleaned_data['City']
+            var_Country     = form.cleaned_data['Country']
+            var_RFC         = form.cleaned_data['RFC']
+            var_ZipCode     = form.cleaned_data['ZipCode']
+            var_Address     = form.cleaned_data['Address']
+            var_Phone1      = form.cleaned_data['Phone1']
+            var_Phone2      = form.cleaned_data['Phone2']
+            var_idSupplier  = form.cleaned_data['idSupplier']
+
+            if not id_supplier:
+                Supplier.objects.create(
+                    Address= var_Address
+                    ,Name= var_Name
+                    ,Country= var_Country
+                    ,City=  var_City
+                    ,ZipCode=var_ZipCode
+                    ,RFC = var_RFC
+                    ,Phone1= var_Phone1
+                    ,Phone2 = var_Phone2
+                )
+            else:
+                updateSupplier = Supplier.objects.get(pk = var_idSupplier)
+                updateSupplier.Address = var_Address
+                updateSupplier.Name    = var_Name
+                updateSupplier.Country = var_Country
+                updateSupplier.City    = var_City
+                updateSupplier.ZipCode = var_ZipCode
+                updateSupplier.RFC     = var_RFC
+                updateSupplier.Phone1  = var_Phone1
+                updateSupplier.Phone2   = var_Phone2
+                #missing auditory fields update updateby
+                updateSupplier.save()
+            return redirect("indexthirdparties") 
+
+    else:
+
+        if id_supplier:
+            supplier = Supplier.objects.get(pk = id_supplier)
+            initdata = {
+                 "Name": supplier.Name
+                ,"City":supplier.City
+                ,"Country":supplier.Country
+                ,"RFC":supplier.RFC
+                ,"ZipCode":supplier.ZipCode
+                ,"Address":supplier.Address
+                ,"Phone1":supplier.Phone1
+                ,"Phone2":supplier.Phone2
+                ,"idSupplier":supplier.pk
+
+            }
+            form = SupplierForm(initdata)
+        else:
+            form = SupplierForm()
+
+    context = {
+        "form":form
+    }
     return render(request,'thirdparties/upsertSupplier.html',context)
 
 def deleteclient(request,id_client=None):
@@ -102,4 +161,7 @@ def deleteclient(request,id_client=None):
     return redirect("indexthirdparties")
 
 def deletesupplier(request,id_supplier=None):
+    if id_supplier:
+        deleteSupplier = Supplier.objects.get(pk=id_supplier)
+        deleteSupplier.delete()
     return redirect("indexthirdparties")
