@@ -60,6 +60,7 @@ def upsertClients(request,id_client= None):
                 updateCustomer.Phone2   = var_Phone2
                 #missing auditory fields update updateby
                 updateCustomer.save()
+            return redirect("indexthirdparties") 
 
     else:
 
@@ -95,6 +96,9 @@ def upsertSupplier(request,id_supplier= None):
     return render(request,'thirdparties/upsertSupplier.html',context)
 
 def deleteclient(request,id_client=None):
+    if id_client:
+        deletedClient = Client.objects.get(pk=id_client)
+        deletedClient.delete()
     return redirect("indexthirdparties")
 
 def deletesupplier(request,id_supplier=None):
