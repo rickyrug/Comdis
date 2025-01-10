@@ -4,6 +4,7 @@ from django.utils.timezone import now
 
 
 class Uom(models.Model):
+    id = models.BigAutoField(primary_key=True)  # Add this line
     Name =  models.CharField(max_length=255,null=False) 
     Code =  models.CharField(max_length=3,null=False) 
     Created = models.DateTimeField(null= False,default=now)

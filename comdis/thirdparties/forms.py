@@ -1,10 +1,11 @@
 from django import forms
 from main.models import Country, City
 
+
 def getContries():
-    items = Country.objects.values_list('id','Name')
-    choices = tuple([(u'', '-----')] + list(items))
-    return choices
+        items = Country.objects.values_list('id','Name')
+        choices = tuple([(u'', '-----')] + list(items))
+        return choices
 
 def getCities():
     items = City.objects.values_list('id','Name')

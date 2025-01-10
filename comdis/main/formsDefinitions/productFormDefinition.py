@@ -10,8 +10,7 @@ class ProductForm(forms.Form):
     
     def getUomChoises():
         items = Uom.objects.values_list('id','Name')
-        choices = tuple([(u'', '-----')] + list(items))
-        
+        choices = tuple([(u'', '-----')] + list(items))        
         return choices
     
     ClassificationChoises = getClassChoises()

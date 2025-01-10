@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.timezone import now
 
 class Country(models.Model):
+    id = models.BigAutoField(primary_key=True)  # Add this line
     Name =  models.CharField(max_length=255,null=False) 
     Code =  models.CharField(max_length=3,null=False) 
 
@@ -17,6 +18,7 @@ class Country(models.Model):
         db_table = 'Country'
 
 class City(models.Model):
+    id = models.BigAutoField(primary_key=True)  # Add this line
     Name =  models.CharField(max_length=255,null=False) 
     Code =  models.CharField(max_length=3,null=False) 
     idCountry = models.ForeignKey(Country, on_delete=models.DO_NOTHING)

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.timezone import now
 
 class Bank(models.Model):
+    id = models.BigAutoField(primary_key=True)  # Add this line
     Name =  models.CharField(max_length=255,null=False) 
     Code =  models.CharField(max_length=3,null=False) 
 

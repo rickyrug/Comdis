@@ -3,6 +3,7 @@ from django.utils.timezone import now
 from main.models import Country, City
 
 class Client(models.Model):
+    id = models.BigAutoField(primary_key=True)  # Add this line
     Name    = models.CharField(max_length=255,null=False)
     Country = models.ForeignKey(Country, on_delete= models.DO_NOTHING)
     City    = models.ForeignKey(City,on_delete=models.DO_NOTHING)
@@ -25,6 +26,7 @@ class Client(models.Model):
         db_table = 'Client'
 
 class Supplier(models.Model):
+    id = models.BigAutoField(primary_key=True)  # Add this line
     Name = models.CharField(max_length=255,null=False)
     Country = models.ForeignKey(Country, on_delete= models.DO_NOTHING)
     City    = models.ForeignKey(City,on_delete=models.DO_NOTHING)
@@ -46,6 +48,7 @@ class Supplier(models.Model):
         db_table = 'Supplier'
 
 class ClientContact(models.Model):
+    id = models.BigAutoField(primary_key=True)  # Add this line
     idCliente = models.ForeignKey(Client,on_delete=models.DO_NOTHING)
     Name      = models.CharField(max_length=255,null=False)
     Phone     = models.CharField(max_length=25,null=False)

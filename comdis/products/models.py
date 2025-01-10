@@ -5,6 +5,7 @@ from main.models            import Uom
 # Create your models here.
 
 class Product(models.Model):
+    id = models.BigAutoField(primary_key=True)  # Add this line
     Name = models.CharField(max_length=255,null=False)
     Uom  = models.ForeignKey(Uom, on_delete=models.DO_NOTHING)
     Classification = models.ForeignKey(Classification, on_delete=models.DO_NOTHING)
