@@ -4,12 +4,12 @@ from main.models import Classification, Uom
 class ProductForm(forms.Form):
     def getClassChoises():
         items = Classification.objects.values_list('id','Name')
-        choices = tuple([(u'', '-----')] + list(items))
+        choices = tuple([(u'', '      ')] + list(items))
         return choices
     
     def getUomChoises():
         items = Uom.objects.values_list('id','Name')
-        choices = tuple([(u'', '-----')] + list(items))    
+        choices = tuple([(u'', '      ')] + list(items))    
         return choices
     
     ClassificationChoises = getClassChoises()
